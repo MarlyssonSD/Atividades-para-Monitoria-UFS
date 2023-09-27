@@ -11,12 +11,15 @@ struct Cadastro{
 void cadastrarCliente(struct Cadastro *vetor, int indice);
 void sacarDinheiro(struct Cadastro *vetor,int numClientes);
 void adicionarDinheiro(struct Cadastro *vetor, int numClientes);
-
+int confereID(struct Cadastro *vetor,int indice);
 void cadastrarCliente(struct Cadastro *vetor, int indice) {
-    
-    printf("Digite o ID do cliente %d: ", indice + 1);
-    scanf("%d", &vetor[indice].id);
-        
+    int bol = 0;
+    do{
+        printf("Digite o ID do cliente %d: ", indice + 1);
+        scanf("%d", &vetor[indice].id);
+        bol = confereID(vetor,indice);
+    }while (bol); 
+            
     printf("Digite o nome do cliente %d: ", indice + 1);
     scanf("%s", vetor[indice].nome);
 
@@ -32,19 +35,21 @@ void sacarDinheiro(struct Cadastro *vetor, int numClientes){
 
     for (int i = 0; i < numClientes; i++){
         if (indice == vetor[i].id){
-            cout << "Quanto deseja sacar?";
-            while (verdd){
+            do{
+                cout << "Quanto deseja sacar?";
                 cin >> saque;
-                if (saque > vetor[i].Saldo){
-                    cout << "Valor e maior que o saldo!" << endl;
-                    system("pause");
+                cout << vetor[i].Saldo << endl;
+                if (saque < vetor[i].Saldo){
+                    vetor[i].Saldo -= saque;
+                    break;
                 }else{
-                    verdd = 0;
+                    cout << "Valor e maior que o saldo!" << endl;
+                    continue;;
                 }
-                vetor[i].Saldo -= saque;
-            }
+                
+            }while (1);
             cout << "Saque atual de " <<vetor[i].nome <<" agora eh " << vetor[i].Saldo << endl;
-            system("pause");
+            //system("pause");
             c = 2;   
         }else if(c != 2){
             c = 1;
@@ -52,7 +57,7 @@ void sacarDinheiro(struct Cadastro *vetor, int numClientes){
     }
     if(c == 1 || numClientes == 0){
         cout << "Cliente nao existe" << endl;
-        system("pause");
+        //system("pause");
     }
 }
 
@@ -68,7 +73,7 @@ void adicionarDinheiro(struct Cadastro *vetor, int numClientes){
             cin >> adcionar;    
             vetor[i].Saldo += adcionar;
             cout << "Saque atual de " <<vetor[i].nome <<" agora eh " << vetor[i].Saldo << endl;   
-            system("pause");
+            //system("pause");
             c = 2;
         }else if(c != 2){
             c = 1;
@@ -76,8 +81,19 @@ void adicionarDinheiro(struct Cadastro *vetor, int numClientes){
     }
     if(c == 1 || numClientes == 0){
         cout << "Cliente nao existe" << endl;
-        system("pause");
+        //system("pause");
     }
 }
 
-
+int confereID(struct Cadastro *vetor,int indice){
+    int bol = 0;
+    for (int i = 0; i < indice+1; i++){
+        if (indice == i){
+            continue;
+        }else if(vetor[indice].id == vetor[i].id){
+            cout << "Pessoa ja cadastrada!" << endl;
+            bol = 1; 
+        }
+    }
+    return bol;
+}
