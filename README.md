@@ -1,2 +1,2 @@
 # Atividades para Monitoria
- Exercicíos criados por min na posição de monitor para serem utilizados na disciplina de Programação II  da Universidade Ferderal de Sergipe.
+ Exercicíos criados por min na posição de monitor para serem utilizados na disciplina de Programação II do curso de Sistemas de Informação de Itabaiana da Universidade Ferderal de Sergipe.
